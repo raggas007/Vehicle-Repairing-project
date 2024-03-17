@@ -10,6 +10,7 @@ export let userValidationSchema = Yup.object({
     .trim()
     .max(55, "last name must not be more than 55 character."),
   email: Yup.string()
+    .email()
     .required("email is required")
     .trim()
     .lowercase()
@@ -28,7 +29,6 @@ export let userValidationSchema = Yup.object({
     .required("role is required"),
   skills: Yup.string().nullable().trim(),
   phoneNumber: Yup.number().required("phone number is required."),
-  image: Yup.string().nullable().trim(),
 });
 
 export let loginUserValidationSchema = Yup.object({

@@ -44,12 +44,6 @@ const userSchema = new mongoose.Schema({
     trim: true,
     default: null,
   },
-  image: {
-    type: String,
-    required: false,
-    trim: true,
-    default: null,
-  },
 });
 
 userSchema.methods.toJSON = function () {

@@ -7,6 +7,7 @@ import {
   IconButton,
   InputAdornment,
   InputLabel,
+  LinearProgress,
   MenuItem,
   OutlinedInput,
   Select,
@@ -15,16 +16,35 @@ import {
 } from "@mui/material";
 import { Formik } from "formik";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import $axios from "../lib/api.instance";
+import { useMutation } from "react-query";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+  const { isLoading, mutate } = useMutation({
+    mutationKey: ["register-user"],
+    mutationFn: async (values) => {
+      console.log(values);
+      return await $axios.post("/register/user", values);
+    },
+    onSuccess: (response) => {
+      navigate("/login");
+    },
+    onError: (error) => {
+      console.log("error happned");
+    },
+  });
+
   return (
     <Box>
+      {isLoading && <LinearProgress color="secondary" />}
       <Formik
         initialValues={{
           firstName: "",
@@ -35,7 +55,6 @@ const Register = () => {
           role: "",
           skills: "",
           phoneNumber: "",
-          image: "",
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
@@ -47,6 +66,7 @@ const Register = () => {
             .trim()
             .max(55, "last name must not be more than 55 character."),
           email: Yup.string()
+            .email()
             .required("email is required")
             .trim()
             .lowercase()
@@ -65,10 +85,9 @@ const Register = () => {
             .required("role is required"),
           skills: Yup.string().nullable().trim(),
           phoneNumber: Yup.number().required("phone number is required."),
-          image: Yup.string().nullable().trim(),
         })}
         onSubmit={(values) => {
-          console.log(values);
+          mutate(values);
         }}
       >
         {({ handleSubmit, getFieldProps, errors, touched }) => (

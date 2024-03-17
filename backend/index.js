@@ -18,7 +18,7 @@ app.use(cors());
 app.use(userRoutes);
 
 //app port and server
-const port = 6000;
+const port = process.env.API_PORT;
 
 app.listen(port, () => {
   console.log(`App is listening to the port ${port}`);

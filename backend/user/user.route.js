@@ -37,7 +37,6 @@ router.post(
 
     //create user
     await User.create(newUser);
-    console.log(newUser);
 
     //give appropriate response
     return res.status(201).send({ message: "user registered successfully." });
