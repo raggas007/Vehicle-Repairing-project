@@ -1,6 +1,7 @@
 import express from "express";
 import connectDB from "./connect.db.js";
 import userRoutes from "./user/user.route.js";
+import vehicleRoutes from "./vehicle/vehicle.route.js";
 import cors from "cors";
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(cors());
 
 // register routes
 app.use(userRoutes);
+app.use(vehicleRoutes);
 
 //app port and server
 const port = process.env.API_PORT;

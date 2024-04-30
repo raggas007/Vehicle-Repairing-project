@@ -19,6 +19,7 @@ router.post(
   "/register/user",
   validateReqBody(userValidationSchema),
   async (req, res) => {
+    console.log("here");
     //extract newUser from req.body
 
     const newUser = req.body;
@@ -70,7 +71,7 @@ router.post(
     }
     // login is successfull, give token
     let payload = { userId: user._id };
-    const token = await jwt.sign(
+    const token = jwt.sign(
       payload,
       "72d2832f509f9ef1ad231d9b9f0e91f78ad68e2108ce5205cad24b7b2667a741",
       { expiresIn: "1d" }
