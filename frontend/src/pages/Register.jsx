@@ -38,7 +38,7 @@ const Register = () => {
       navigate("/login");
     },
     onError: (error) => {
-      console.log("error happned");
+      console.log("error happened");
     },
   });
 

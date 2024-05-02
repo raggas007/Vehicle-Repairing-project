@@ -90,7 +90,10 @@ export const isUser = async (req, res, next) => {
   }
   let payload;
   try {
-    payload = jwt.verify(token, "45c765d6c890437641281273c41830af");
+    payload = jwt.verify(
+      token,
+      "72d2832f509f9ef1ad231d9b9f0e91f78ad68e2108ce5205cad24b7b2667a741"
+    );
   } catch (error) {
     return res.status(401).send({ message: "unauthorized." });
   }
