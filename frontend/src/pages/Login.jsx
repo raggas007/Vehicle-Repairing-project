@@ -14,15 +14,37 @@ import {
 import { Formik } from "formik";
 import * as Yup from "yup";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
+import $axios from "../lib/api.instance";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+  const { isLoading, mutate } = useMutation({
+    mutationKey: ["login-user"],
+    mutationFn: async (values) => {
+      return await $axios.post("/login/user", values);
+    },
+    onSuccess: (response) => {
+      localStorage.setItem("token", response?.data?.token);
+      localStorage.setItem("userRole", response?.data?.userDetails?.role);
+      localStorage.setItem("firstName", response?.data?.userDetails?.firstName);
+      localStorage.setItem("lastName", response?.data?.userDetails?.lastName);
+      localStorage.setItem("email", response?.data?.userDetails?.email);
+
+      navigate("/home");
+    },
+    onError: (error) => {
+      console.log(error?.response?.data?.message);
+    },
+  });
+
   return (
-    <Box>
+    <Box sx={{}}>
       <Formik
         initialValues={{
           email: "",
@@ -41,7 +63,7 @@ const Login = () => {
             .max(20, "maximum character should be not more than 20."),
         })}
         onSubmit={(values) => {
-          console.log(values);
+          mutate(values);
         }}
       >
         {({ handleSubmit, getFieldProps, errors, touched }) => (
