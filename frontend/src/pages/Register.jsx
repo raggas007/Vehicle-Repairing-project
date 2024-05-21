@@ -83,8 +83,12 @@ const Register = () => {
           role: Yup.string()
             .oneOf(["Customer", "Mechanic"])
             .required("role is required"),
-          skills: Yup.string().nullable().trim(),
-          phoneNumber: Yup.number().required("phone number is required."),
+          phoneNumber: Yup.string()
+            .matches(
+              /^[0-9]{10}$/,
+              "Phone number shouldn't be more than 10 digit."
+            )
+            .required("contact number is required"),
         })}
         onSubmit={(values) => {
           mutate(values);
@@ -156,12 +160,7 @@ const Register = () => {
                 <FormHelperText error>{errors.role}</FormHelperText>
               ) : null}
             </FormControl>
-            <FormControl>
-              <TextField label="Skills" {...getFieldProps("skills")} />
-              {touched.skills && errors.skills ? (
-                <FormHelperText error>{errors.skills}</FormHelperText>
-              ) : null}
-            </FormControl>
+
             <FormControl>
               <TextField
                 label="Phone Number"

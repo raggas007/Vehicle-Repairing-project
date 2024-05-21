@@ -31,6 +31,24 @@ router.post(
   }
 );
 
+router.get("/view/request/details", isMechanic, async (req, res) => {
+  //extract vehicleId from req.params
+  const vehicleId = req.params.id;
+  //find Todo
+  const vehicle = await Vehicle.find(vehicleId);
+
+  //if not vehicle throw error
+
+  if (!vehicle) {
+    return res.status(404).send({ message: "no todo is found" });
+  }
+
+  //send appropriate response
+  return res
+    .status(200)
+    .send({ message: "success", vehicleRequestDetails: vehicle });
+});
+
 //get register request
 router.get(
   "/view/request/:id",
@@ -91,7 +109,7 @@ router.delete(
 //edit vehicle request
 
 router.put(
-  "/vehicle/request/:id",
+  "/edit/request/:id",
   isMechanic,
   checkMongoIdValidity,
   validateReqBody(vehicleValidationSchema),

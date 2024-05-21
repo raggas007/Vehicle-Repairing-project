@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
+import RequestList from "../components/RequestList";
+import VehicleDetailRequestCard from "../components/VehicleDetailRequestcard";
 
 const ViewRequest = () => {
   return (
     <div>
-      View request
+      <RequestList />
+      <VehicleDetailRequestCard />
     </div>
-  )
-}
+  );
+};
 
-export default ViewRequest
+export default ViewRequest;

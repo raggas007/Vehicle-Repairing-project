@@ -3,6 +3,7 @@ import MainLayout from "../layout/MainLayout";
 import Home from "../pages/Home";
 import Request from "../pages/Request";
 import ViewRequest from "../pages/ViewRequest";
+import AboutUs from "../pages/AboutUs.jsx";
 
 const MainRoutes = [
   {
@@ -17,6 +18,10 @@ const MainRoutes = [
       {
         path: "view-request",
         element: <ViewRequest />,
+      },
+      {
+        path: "about-us",
+        element: <AboutUs />,
       },
     ],
   },

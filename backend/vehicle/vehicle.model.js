@@ -13,13 +13,13 @@ const vehicleSchema = new mongoose.Schema(
         "Four Wheeler",
       ],
     },
-    vehicleNumber: {
+    customerName: {
       type: String,
       required: true,
       trim: true,
-      maxLength: 15,
+      maxLength: 30,
     },
-    vehicleName: {
+    vehicleNumber: {
       type: String,
       required: true,
       trim: true,
@@ -31,15 +31,21 @@ const vehicleSchema = new mongoose.Schema(
       trim: true,
       maxLength: 20,
     },
+    payment: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    status: {
+      type: String,
+      required: false,
+      enum: ["Pending", "Completed"],
+    },
     problemDescription: {
       type: String,
       required: true,
       trim: true,
       maxLength: 100,
-    },
-    customerId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
     },
   },
   {

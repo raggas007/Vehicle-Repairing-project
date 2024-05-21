@@ -35,3 +35,9 @@ export let loginUserValidationSchema = Yup.object({
   email: Yup.string().required("email is required").lowercase().trim(),
   password: Yup.string().required("password is required").trim(),
 });
+
+export const updateUserValidationSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email'),
+  password: Yup.string(),
+  // Add other fields that can be updated
+});
