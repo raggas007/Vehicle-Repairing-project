@@ -30,6 +30,30 @@ const Home = () => {
             </Typography>
           </Button>
         </section>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: "20px",
+          }}
+        >
+          <Link
+            to="/about-us"
+            style={{
+              marginTop: "3rem",
+              textAlign: "center",
+              display: "block",
+            }}
+          >
+            <Typography
+              variant="h4"
+              color="secondary"
+              sx={{ marginTop: "4rem", color: "black" }}
+            >
+              <Typography variant="h3">About Us?</Typography> Go there
+            </Typography>
+          </Link>
+        </div>
       </div>
     );
   } else {

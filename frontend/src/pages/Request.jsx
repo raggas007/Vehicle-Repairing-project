@@ -252,7 +252,7 @@ const Request = () => {
           vehicleNumber: "",
           vehicleBrand: "",
           payment: 0,
-          ststus: "pending",
+          status: "Pending",
           problemDescription: "",
         }}
         validationSchema={Yup.object({
@@ -369,6 +369,7 @@ const Request = () => {
               <TextField
                 label="Payment"
                 type="number"
+                disabled
                 {...getFieldProps("payment")}
               />
               {touched.payment && errors.payment ? (

@@ -47,6 +47,10 @@ const vehicleSchema = new mongoose.Schema(
       trim: true,
       maxLength: 100,
     },
+    customerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+    },
   },
   {
     timestamps: true,

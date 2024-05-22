@@ -203,12 +203,12 @@ const Header = (props) => {
     userRole === "Customer"
       ? [
           { id: 1, name: "Home", path: "/home" },
-          { id: 2, name: "Make Request", path: "/make-request" },
-          { id: 3, name: "AboutUs", path: "/about-us" },
+          { id: 2, name: "Make-Request", path: "/make-request" },
+          { id: 3, name: "About-Us", path: "/about-us" },
         ]
       : [
           { id: 1, name: "Home", path: "/home" },
-          { id: 2, name: "View Request", path: "/view-request" },
+          { id: 2, name: "View-Request", path: "/view-request" },
         ];
 
   const drawer = (
@@ -240,7 +240,7 @@ const Header = (props) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ background: "green" }}>
+      <AppBar component="nav" sx={{ background: "Blue" }}>
         <Toolbar>
           <IconButton
             color="inherit"

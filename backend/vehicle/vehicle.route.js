@@ -20,7 +20,7 @@ router.post(
     //extract new product from req.body
     const newVehicle = req.body;
     //add customer
-    newVehicle.CustomerId = req.loggedInUserId;
+    newVehicle.customerId = req.loggedInUserId;
 
     //add new vehicle request
     await Vehicle.create(newVehicle);
@@ -52,7 +52,7 @@ router.get("/view/request/details", isMechanic, async (req, res) => {
 //get register request
 router.get(
   "/view/request/:id",
-  isUser,
+  isMechanic,
   checkMongoIdValidity,
   async (req, res) => {
     //extract new vehicle from req.params
@@ -71,7 +71,7 @@ router.get(
     //send appropriate response
     return res
       .status(200)
-      .send({ message: "success", vehicleDetails: vehicle });
+      .send({ message: "success", vehicleRequestDetails: vehicle });
   }
 );
 

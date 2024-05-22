@@ -4,6 +4,8 @@ import Home from "../pages/Home";
 import Request from "../pages/Request";
 import ViewRequest from "../pages/ViewRequest";
 import AboutUs from "../pages/AboutUs.jsx";
+import EditRequest from "../pages/EditRequest.jsx";
+import PendingRequest from "../pages/PendingRequest.jsx";
 
 const MainRoutes = [
   {
@@ -12,16 +14,24 @@ const MainRoutes = [
     children: [
       { path: "home", element: <Home /> },
       {
-        path: "make-request",
+        path: "/make-request",
         element: <Request />,
       },
       {
-        path: "view-request",
+        path: "/view-request",
         element: <ViewRequest />,
       },
       {
-        path: "about-us",
+        path: "/about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "/pending-request",
+        element: <PendingRequest />,
+      },
+      {
+        path: "/edit/request/:id",
+        element: <EditRequest />,
       },
     ],
   },
