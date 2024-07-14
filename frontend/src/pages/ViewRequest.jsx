@@ -12,8 +12,14 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import $axios from "../lib/api.instance";
 import VehicleRequestDetails from "../components/VehicleRequestDetails";
+import { useDispatch } from "react-redux";
+import {
+  openErrorSnackbar,
+  openSuccessSnackbar,
+} from "../store/slices/snackbarSlice";
 
 const ViewRequest = () => {
+  const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -37,10 +43,11 @@ const ViewRequest = () => {
         return await $axios.delete(`/delete/request/${_id}`);
       },
       onSuccess: (response) => {
+        dispatch(openSuccessSnackbar(response?.data?.message));
         queryClient.invalidateQueries("get-details");
       },
       onError: (error) => {
-        console.log(error?.response?.data?.message);
+        dispatch(openErrorSnackbar(error?.response?.data?.message));
       },
     });
   if (getVehicleLoading || deleteVehicleLoading) {

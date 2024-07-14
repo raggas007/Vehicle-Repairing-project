@@ -20,8 +20,14 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import $axios from "../lib/api.instance";
 import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
+import {
+  openErrorSnackbar,
+  openSuccessSnackbar,
+} from "../store/slices/snackbarSlice";
 
 const Register = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -35,10 +41,11 @@ const Register = () => {
       return await $axios.post("/register/user", values);
     },
     onSuccess: (response) => {
+      dispatch(openSuccessSnackbar(response?.data?.message));
       navigate("/login");
     },
     onError: (error) => {
-      console.log("error happened");
+      dispatch(openErrorSnackbar(error?.response?.data?.message));
     },
   });
 
@@ -60,11 +67,11 @@ const Register = () => {
           firstName: Yup.string()
             .required("first name is required.")
             .trim()
-            .max(55, " first name must not be more than 55 character."),
+            .max(20, " first name must not be more than 20 character."),
           lastName: Yup.string()
             .required("last name is required.")
             .trim()
-            .max(55, "last name must not be more than 55 character."),
+            .max(20, "last name must not be more than 20 character."),
           email: Yup.string()
             .email()
             .required("email is required")
@@ -86,7 +93,7 @@ const Register = () => {
           phoneNumber: Yup.string()
             .matches(
               /^[0-9]{10}$/,
-              "Phone number shouldn't be more than 10 digit."
+              "Phone number should contain 10 digit only."
             )
             .required("contact number is required"),
         })}

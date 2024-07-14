@@ -15,8 +15,14 @@ import { useMutation } from "react-query";
 import * as Yup from "yup";
 import $axios from "../lib/api.instance";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  openErrorSnackbar,
+  openSuccessSnackbar,
+} from "../store/slices/snackbarSlice";
 
 const Request = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading, mutate } = useMutation({
     mutationKey: ["register-vehicle-request"],
@@ -35,10 +41,11 @@ const Request = () => {
       }
     },
     onSuccess: (response) => {
+      dispatch(openSuccessSnackbar(response?.data?.message));
       navigate("/Home");
     },
     onError: (error) => {
-      console.log(error.message);
+      dispatch(openErrorSnackbar(error?.response?.data?.message));
     },
   });
   return (

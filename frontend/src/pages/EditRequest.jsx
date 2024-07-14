@@ -16,7 +16,13 @@ import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import $axios from "../lib/api.instance";
+import { useDispatch } from "react-redux";
+import {
+  openErrorSnackbar,
+  openSuccessSnackbar,
+} from "../store/slices/snackbarSlice";
 const EditRequest = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const params = useParams();
@@ -43,10 +49,11 @@ const EditRequest = () => {
       return await $axios.put(`/edit/request/${vehicleId}`, values);
     },
     onSuccess: (response) => {
+      dispatch(openSuccessSnackbar(response?.data?.message));
       navigate("/view-request");
     },
     onError: (error) => {
-      console.log(error?.response?.data?.message);
+      dispatch(openErrorSnackbar(error?.response?.data?.message));
     },
   });
 
@@ -159,7 +166,6 @@ const EditRequest = () => {
               <TextField
                 label="customer Name"
                 required
-                disabled
                 {...getFieldProps("customerName")}
               />
               {touched.customerName && errors.customerName ? (

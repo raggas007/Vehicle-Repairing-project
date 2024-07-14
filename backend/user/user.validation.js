@@ -4,11 +4,11 @@ export let userValidationSchema = Yup.object({
   firstName: Yup.string()
     .required("first name is required.")
     .trim()
-    .max(55, " first name must not be more than 55 character."),
+    .max(20, " first name must not be more than 20 character."),
   lastName: Yup.string()
     .required("last name is required.")
     .trim()
-    .max(55, "last name must not be more than 55 character."),
+    .max(20, "last name must not be more than 20 character."),
   email: Yup.string()
     .email()
     .required("email is required")
@@ -37,7 +37,7 @@ export let loginUserValidationSchema = Yup.object({
 });
 
 export const updateUserValidationSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email'),
+  email: Yup.string().email("Invalid email"),
   password: Yup.string(),
   // Add other fields that can be updated
 });

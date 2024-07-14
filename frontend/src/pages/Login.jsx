@@ -17,8 +17,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import $axios from "../lib/api.instance";
+import { useDispatch } from "react-redux";
+import {
+  openErrorSnackbar,
+  openSuccessSnackbar,
+} from "../store/slices/snackbarSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -35,11 +41,11 @@ const Login = () => {
       localStorage.setItem("firstName", response?.data?.userDetails?.firstName);
       localStorage.setItem("lastName", response?.data?.userDetails?.lastName);
       localStorage.setItem("email", response?.data?.userDetails?.email);
-
+      dispatch(openSuccessSnackbar(response?.data?.message));
       navigate("/home");
     },
     onError: (error) => {
-      console.log(error?.response?.data?.message);
+      dispatch(openErrorSnackbar(error?.response?.data?.message));
     },
   });
 
@@ -139,4 +145,3 @@ const Login = () => {
 };
 
 export default Login;
-

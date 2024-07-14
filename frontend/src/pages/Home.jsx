@@ -64,12 +64,12 @@ const Home = () => {
           </Button>
           <Stack direction={"row"} justifyContent="center" mt="3rem">
             <img
-              src="https://miro.medium.com/v2/resize:fit:1400/1*duVdgJ3oEQOxtsyPw7ofYA.jpeg"
+              src="https://www.shutterstock.com/image-photo/young-african-american-mechanic-working-600nw-2099017543.jpg"
               alt="Customer Image 1"
               style={{ maxWidth: "100%", maxHeight: "400px" }}
             />
             <img
-              src="https://media.istockphoto.com/id/1407846366/photo/car-care-maintenance-and-servicing-close-up-hand-technician-auto-mechanic-using-the-wrench-to.jpg?s=612x612&w=0&k=20&c=yuSKGJfjI8CztFPuoXPs2PyfBezIROPz3iAenls6ly4=" // Provide the URL of the mechanic-related image
+              src="https://miro.medium.com/v2/resize:fit:4320/1*JktzC9GrA_l4yz0cCy8a5Q.jpeg"
               alt="Customer Image 2"
               style={{ maxWidth: "100%", maxHeight: "400px" }}
             />
